@@ -1,0 +1,7 @@
+proxy:
+  host: your-proxy-address.com
+  port: 1080
+  type: SOCKS5
+events:
+  targetServerHost: your-target-server.com
+  targetServerPort: 25565
