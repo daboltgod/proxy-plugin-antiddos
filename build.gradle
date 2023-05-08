@@ -1,0 +1,50 @@
+plugins {
+    id 'java'
+}
+
+group 'com.bolt'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Spigot/Bukkit API
+    compileOnly 'org.spigotmc:spigot-api:1.19.4-R0.1-SNAPSHOT'
+
+    // Logging
+    implementation 'org.apache.logging.log4j:log4j-api:2.14.1'
+    implementation 'org.apache.logging.log4j:log4j-core:2.14.1'
+
+    // YAML support
+    implementation 'org.yaml:snakeyaml:1.29'
+
+    // HTTP client
+    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'com.squareup.okio:okio:2.10.0'
+
+    // Testing
+    testImplementation 'junit:junit:5.7.2'
+    testImplementation 'org.mockito:mockito-core:3.10.0'
+}
+
+
+sourceSets {
+    main {
+        resources {
+            srcDirs = ['src/main/resources', 'resources']
+        }
+    }
+}
+
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'com.bolt.ProxyPluginMain'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
